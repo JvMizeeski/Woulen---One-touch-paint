@@ -59,13 +59,13 @@
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <!-- UPDATED & ENLARGED LOGO -->
             <a href="#">
-                <img src="logo-one-touch.avif" alt="One Touch Paint Logo" class="h-30 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/280x80/1d4ed8/ffffff?text=One+Touch+Paint';">
+                <img src="logo-one-touch.avif" alt="One Touch Paint Logo" class="h-24 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/280x96/1d4ed8/ffffff?text=One+Touch+Paint';">
             </a>
             
             <div class="hidden md:flex items-center space-x-6">
+                <a href="#about" class="text-gray-600 hover:text-blue-700 transition duration-300">About Us</a>
                 <a href="#services" class="text-gray-600 hover:text-blue-700 transition duration-300">Services</a>
                 <a href="#gallery" class="text-gray-600 hover:text-blue-700 transition duration-300">Gallery</a>
-                <a href="#about" class="text-gray-600 hover:text-blue-700 transition duration-300">About Us</a>
                 <a href="#testimonials" class="text-gray-600 hover:text-blue-700 transition duration-300">Testimonials</a>
                 <span class="text-gray-400">|</span>
                 <span class="font-semibold text-gray-700">Contact us: 617-291-3875 / 617-224-3026</span>
@@ -83,9 +83,9 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#about" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">About Us</a>
             <a href="#services" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Services</a>
             <a href="#gallery" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Gallery</a>
-            <a href="#about" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">About Us</a>
             <a href="#testimonials" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Testimonials</a>
             <div class="border-t my-2"></div>
             <p class="px-6 py-2 text-sm font-semibold text-gray-700">Contact: 617-291-3875</p>
@@ -147,9 +147,35 @@
                 </div>
             </div>
         </section>
+
+        <!-- =========== About Us Section (REORDERED) =========== -->
+        <section id="about" class="py-16 md:py-24 bg-gray-50" data-aos="fade-up">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" data-aos-delay="200">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Painting Experts Who Get It Right the First Time</h2>
+                    <p class="text-gray-600 mb-4">At One Touch Paint, we don't just deliver painted walls; we deliver peace of mind. Julio and Arthur personally oversee each project, ensuring every detail is done correctly right from the first time.</p>
+                    <p class="text-gray-600 mb-6">After decades in the industry, they have faced all types of challenges in residential, commercial, and industrial painting, and this practical experience is what transforms the result into a flawless finish, without rework and without headaches. Fully licensed, insured, and OSHA certified, we combine safety, professionalism, and excellence in every service.</p>
+                    <a href="#contact" class="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
+                </div>
+                <!-- Before & After Image Comparator -->
+                <div data-aos="fade-left" data-aos-delay="200">
+                    <div id="image-comparator" class="relative rounded-lg shadow-xl w-full max-w-full mx-auto overflow-hidden">
+                        <img src="https://placehold.co/800x600/d1d5db/4b5563?text=Before" alt="Before painting" class="block w-full rounded-lg">
+                        <div id="after-image-container" class="absolute top-0 left-0 h-full overflow-hidden">
+                            <img src="https://placehold.co/800x600/3b82f6/ffffff?text=After" alt="After painting" class="block h-full object-cover" style="width:100%; max-width: none; object-position: left;">
+                        </div>
+                        <div id="slider" class="absolute top-0 h-full w-2 bg-white cursor-ew-resize flex items-center justify-center">
+                             <div class="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" /></svg>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <!-- =========== Services Section =========== -->
-        <section id="services" class="py-16 md:py-24 bg-gray-50" data-aos="fade-up">
+        <!-- =========== Services Section (REORDERED) =========== -->
+        <section id="services" class="py-16 md:py-24 bg-white" data-aos="fade-up">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800">See what services we can offer for your home or business</h2>
@@ -194,8 +220,8 @@
             </div>
         </section>
 
-        <!-- =========== NEW Gallery Section =========== -->
-        <section id="gallery" class="py-16 md:py-24 bg-white" data-aos="fade-up">
+        <!-- =========== Gallery Section (REORDERED) =========== -->
+        <section id="gallery" class="py-16 md:py-24 bg-gray-50" data-aos="fade-up">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Recent Work</h2>
@@ -218,34 +244,8 @@
             </div>
         </section>
 
-        <!-- =========== About Us Section =========== -->
-        <section id="about" class="py-16 md:py-24 bg-gray-50" data-aos="fade-up">
-            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-                <div data-aos="fade-right" data-aos-delay="200">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Painting Experts Who Get It Right the First Time</h2>
-                    <p class="text-gray-600 mb-4">At One Touch Paint, we don't just deliver painted walls; we deliver peace of mind. Julio and Arthur personally oversee each project, ensuring every detail is done correctly right from the first time.</p>
-                    <p class="text-gray-600 mb-6">After decades in the industry, they have faced all types of challenges in residential, commercial, and industrial painting, and this practical experience is what transforms the result into a flawless finish, without rework and without headaches. Fully licensed, insured, and OSHA certified, we combine safety, professionalism, and excellence in every service.</p>
-                    <a href="#contact" class="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
-                </div>
-                <!-- Before & After Image Comparator -->
-                <div data-aos="fade-left" data-aos-delay="200">
-                    <div id="image-comparator" class="relative rounded-lg shadow-xl w-full max-w-full mx-auto overflow-hidden">
-                        <img src="https://placehold.co/800x600/d1d5db/4b5563?text=Before" alt="Before painting" class="block w-full rounded-lg">
-                        <div id="after-image-container" class="absolute top-0 left-0 h-full overflow-hidden">
-                            <img src="https://placehold.co/800x600/3b82f6/ffffff?text=After" alt="After painting" class="block h-full object-cover" style="width:100%; max-width: none; object-position: left;">
-                        </div>
-                        <div id="slider" class="absolute top-0 h-full w-2 bg-white cursor-ew-resize flex items-center justify-center">
-                             <div class="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-gray-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" /></svg>
-                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- =========== Testimonials Section =========== -->
-        <section id="testimonials" class="py-16 md:py-24 bg-gray-50" data-aos="fade-up">
+        <section id="testimonials" class="py-16 md:py-24 bg-white" data-aos="fade-up">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Client Testimonials</h2>
