@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Touch Paint - Painting Done Right The First Time</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- AOS (Animate on Scroll) Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Style for the hero background image with spotlight effect */
+        .hero-bg {
+            background-image: 
+                /* New spotlight effect */
+                radial-gradient(ellipse at 50% 100%, rgba(147, 197, 253, 0.15) 0%, rgba(147, 197, 253, 0) 50%),
+                /* Dark overlay */
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                /* Background image */
+                url('https://static.wixstatic.com/media/48ad6c_d04582a3869f464bb7d877e855493543~mv2.jpg/v1/fill/w_1745,h_618,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/48ad6c_d04582a3869f464bb7d877e855493543~mv2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        /* Styles for the Before/After Image Comparator */
+        #image-comparator {
+            user-select: none; /* Prevent text selection during drag */
+        }
+        #slider {
+            transform: translateX(-50%); /* Center the slider handle */
+        }
+        /* Style for expanding image in service cards */
+        .service-card-image {
+            height: 80px; /* Initial height */
+            transition: height 0.3s ease-in-out;
+        }
+        @media (min-width: 768px) { /* Apply hover effect only on desktop */
+            .group:hover .service-card-image {
+                height: 160px; /* Expanded height */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- =========== Header / Navigation =========== -->
+    <header id="header" class="bg-white shadow-md fixed top-0 left-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- UPDATED & ENLARGED LOGO -->
+            <a href="#">
+                <img src="logo-one-touch.avif" alt="One Touch Paint Logo" class="h-30 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/280x80/1d4ed8/ffffff?text=One+Touch+Paint';">
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#services" class="text-gray-600 hover:text-blue-700 transition duration-300">Services</a>
+                <a href="#gallery" class="text-gray-600 hover:text-blue-700 transition duration-300">Gallery</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-700 transition duration-300">About Us</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-blue-700 transition duration-300">Testimonials</a>
+                <span class="text-gray-400">|</span>
+                <span class="font-semibold text-gray-700">Contact us: 617-291-3875 / 617-224-3026</span>
+            </div>
+            
+            <a href="#contact" class="hidden md:block bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#services" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Services</a>
+            <a href="#gallery" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Gallery</a>
+            <a href="#about" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">About Us</a>
+            <a href="#testimonials" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Testimonials</a>
+            <div class="border-t my-2"></div>
+            <p class="px-6 py-2 text-sm font-semibold text-gray-700">Contact: 617-291-3875</p>
+            <div class="p-4">
+                <a href="#contact" class="block text-center w-full bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- =========== Hero Section =========== -->
+        <section class="hero-bg text-white pt-32 pb-20 md:pt-48 md:pb-32">
+            <div class="container mx-auto px-6 text-center" data-aos="fade-in" data-aos-duration="1000">
+                <span class="bg-white/10 border border-white/20 text-sm font-semibold px-4 py-1 rounded-full">33 Years of Licensed & Insured Premium Painting</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight my-4">One & Done: Painting done right the first time, with no rework and no headaches.</h1>
+                <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8">At One Touch Paint, we believe quality work should never need a second try. We get it right from the very first touch.</p>
+                <a href="#contact" class="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote: 617-291-3875</a>
+            </div>
+        </section>
+
+        <!-- =========== Why Choose Us Section =========== -->
+        <section class="py-16 md:py-24 bg-white" data-aos="fade-up">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Why Choose One Touch Paint?</h2>
+                    <p class="text-gray-600 mt-2 max-w-2xl mx-auto">More than three decades of experience, official certifications, and a commitment to quality and safety in every project.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="p-6 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div>
+                        <div><h3 class="text-xl font-semibold mb-1">OSHA Certified</h3><p class="text-gray-600">Ensuring safety and compliance with U.S. standards.</p></div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="p-6 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg></div>
+                        <div><h3 class="text-xl font-semibold mb-1">Fully Licensed & Insured</h3><p class="text-gray-600">Total peace of mind: everything is licensed and insured.</p></div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="p-6 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
+                        <div><h3 class="text-xl font-semibold mb-1">33+ Years of Experience</h3><p class="text-gray-600">Decades of know-how among our specialists.</p></div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="p-6 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div>
+                        <div><h3 class="text-xl font-semibold mb-1">On-Time, Every Time</h3><p class="text-gray-600">A real commitment to deadlines and schedules.</p></div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="p-6 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-4" data-aos="fade-up" data-aos-delay="500">
+                        <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></div>
+                        <div><h3 class="text-xl font-semibold mb-1">Owner-Supervised</h3><p class="text-gray-600">Every job is closely monitored by the owner.</p></div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="p-6 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-4" data-aos="fade-up" data-aos-delay="600">
+                        <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg></div>
+                        <div><h3 class="text-xl font-semibold mb-1">Clean & Organized</h3><p class="text-gray-600">Your space delivered clean, ready to use.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- =========== Services Section =========== -->
+        <section id="services" class="py-16 md:py-24 bg-gray-50" data-aos="fade-up">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">See what services we can offer for your home or business</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <!-- Residential Card -->
+                    <div class="group bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out hover:shadow-2xl" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://placehold.co/600x400/3B82F6/FFFFFF?text=Residential" alt="Residential Painting" class="w-full object-cover service-card-image">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-4">Residential Painting</h3>
+                            <p class="text-gray-600 mb-6">Give your home a fresh new look. Our focus on residential painting goes beyond aesthetics; we create comfortable, modern environments with a flawless finish.</p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Interior and exterior painting</li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Surface preparation and repair</li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Accent walls and decorative panels</li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Custom wall finishes</li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Deck staining and painting</li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Light carpentry and millwork finishes</li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Baseboards, crown molding, panels, and built-ins</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Commercial Card -->
+                    <div class="group bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out hover:shadow-2xl" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://placehold.co/600x400/10B981/FFFFFF?text=Commercial" alt="Commercial Painting" class="w-full object-cover service-card-image">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-4">Commercial & Industrial Painting</h3>
+                            <p class="text-gray-600 mb-6">We have experience in both traditional commercial spaces and complex industrial projects. What sets us apart is our ability to adapt methods, techniques, and paints to each environment's requirements.</p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> High-performance coatings</li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Advanced technical methods</li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Experience in critical environments</li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Compliance and safety (OSHA)</li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-2 mt-1">&#10003;</span> Large-scale efficiency</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="#contact" class="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote for Your Project</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========== NEW Gallery Section =========== -->
+        <section id="gallery" class="py-16 md:py-24 bg-white" data-aos="fade-up">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Recent Work</h2>
+                    <p class="text-gray-600 mt-2">A glimpse into the quality and craftsmanship we deliver.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://placehold.co/600x600/3b82f6/ffffff?text=Project+1" alt="Painting Project 1" class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-110">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://placehold.co/600x600/10b981/ffffff?text=Project+2" alt="Painting Project 2" class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-110">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://placehold.co/600x600/ef4444/ffffff?text=Project+3" alt="Painting Project 3" class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-110">
+                    </div>
+                    <div class="overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                        <img src="https://placehold.co/600x600/f59e0b/ffffff?text=Project+4" alt="Painting Project 4" class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-110">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========== About Us Section =========== -->
+        <section id="about" class="py-16 md:py-24 bg-gray-50" data-aos="fade-up">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" data-aos-delay="200">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Painting Experts Who Get It Right the First Time</h2>
+                    <p class="text-gray-600 mb-4">At One Touch Paint, we don't just deliver painted walls; we deliver peace of mind. Julio and Arthur personally oversee each project, ensuring every detail is done correctly right from the first time.</p>
+                    <p class="text-gray-600 mb-6">After decades in the industry, they have faced all types of challenges in residential, commercial, and industrial painting, and this practical experience is what transforms the result into a flawless finish, without rework and without headaches. Fully licensed, insured, and OSHA certified, we combine safety, professionalism, and excellence in every service.</p>
+                    <a href="#contact" class="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
+                </div>
+                <!-- Before & After Image Comparator -->
+                <div data-aos="fade-left" data-aos-delay="200">
+                    <div id="image-comparator" class="relative rounded-lg shadow-xl w-full max-w-full mx-auto overflow-hidden">
+                        <img src="https://placehold.co/800x600/d1d5db/4b5563?text=Before" alt="Before painting" class="block w-full rounded-lg">
+                        <div id="after-image-container" class="absolute top-0 left-0 h-full overflow-hidden">
+                            <img src="https://placehold.co/800x600/3b82f6/ffffff?text=After" alt="After painting" class="block h-full object-cover" style="width:100%; max-width: none; object-position: left;">
+                        </div>
+                        <div id="slider" class="absolute top-0 h-full w-2 bg-white cursor-ew-resize flex items-center justify-center">
+                             <div class="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" /></svg>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========== Testimonials Section =========== -->
+        <section id="testimonials" class="py-16 md:py-24 bg-gray-50" data-aos="fade-up">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Client Testimonials</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100"><p class="text-gray-600 mb-4">"One Touch Paint Services Corp. exceeded my expectations with their exquisite carpentry work. I highly recommend their services and look forward to working with them on future projects."</p><p class="font-bold text-gray-800">- Dave Reddington</p></div>
+                    <div class="bg-white p-8 rounded-lg shadow-md transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="200"><p class="text-gray-600 mb-4">"Professionalism, attention to detail, and exceptional craftsmanship define One Touch Paint Services Corp. Their dedication to customer satisfaction is truly commendable."</p><p class="font-bold text-gray-800">- Amelia Banks</p></div>
+                    <div class="bg-white p-8 rounded-lg shadow-md transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="300"><p class="text-gray-600 mb-4">"I am thoroughly impressed with the professionalism and skill demonstrated by One Touch Paint Services Corp. They transformed my space with their outstanding carpentry expertise."</p><p class="font-bold text-gray-800">- Kenny Stutes</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========== Contact / CTA Section =========== -->
+        <section id="contact" class="py-16 md:py-24 bg-blue-700 text-white" data-aos="fade-up">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Space?</h2>
+                        <p class="text-blue-100 mb-6">Contact us today for a free, no-obligation estimate. Let's discuss your project and how we can bring your vision to life.</p>
+                        <div class="space-y-4">
+                            <p class="flex items-center text-xl"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.518.759a11.024 11.024 0 005.176 5.176l.76-1.518a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg> 617-291-3875</p>
+                            <p class="flex items-center text-xl"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg> contact@onetouchpaintcorp.com</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-2xl">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Get a Free Quote</h3>
+                        <form action="#" method="POST">
+                            <div class="mb-4"><label for="name" class="block text-gray-700 text-sm font-bold mb-2">Full Name</label><input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required></div>
+                            <div class="mb-4"><label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label><input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required></div>
+                            <div class="mb-6"><label for="message" class="block text-gray-700 text-sm font-bold mb-2">Project Details</label><textarea id="message" name="message" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea></div>
+                            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Send Request</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========== Footer =========== -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold">Professional painting near you</h3>
+                <p class="text-gray-400 mt-2 mb-6 max-w-2xl mx-auto">We serve clients in several cities in Massachusetts, offering complete solutions in painting and finishing.</p>
+                <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-gray-300">
+                    <span>Weston</span> &bull; <span>Wesley</span> &bull; <span>Newton</span> &bull; <span>Brookline</span> &bull; <span>Cambridge</span> &bull; <span>Needham</span> &bull; <span>Dedham</span> &bull; <span>Sherborne</span> &bull; <span>Natick</span> &bull; <span>Andover</span> &bull; <span>Concord</span> &bull; <span>Wayland</span> &bull; <span>Sudbury</span> &bull; <span>Lexington</span>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                 <p class="text-gray-400">&copy; 2025 by One Touch Paint Services Corp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS (Animate on Scroll) Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Logic
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            const navLinks = mobileMenu.querySelectorAll('a');
+            navLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+            // Before & After Image Comparator Logic
+            const comparator = document.getElementById('image-comparator');
+            if (comparator) {
+                const slider = document.getElementById('slider');
+                const afterImageContainer = document.getElementById('after-image-container');
+                const afterImage = afterImageContainer.querySelector('img');
+
+                function setInitialPosition() {
+                    const initialPercentage = 50;
+                    slider.style.left = `${initialPercentage}%`;
+                    afterImageContainer.style.width = `${initialPercentage}%`;
+                }
+
+                function resizeAfterImage() {
+                    afterImage.style.width = `${comparator.offsetWidth}px`;
+                }
+                
+                window.addEventListener('resize', resizeAfterImage);
+                resizeAfterImage();
+                setInitialPosition();
+
+                let isDragging = false;
+
+                function startDrag(e) {
+                    isDragging = true;
+                    document.body.classList.add('cursor-ew-resize');
+                }
+
+                function stopDrag(e) {
+                    isDragging = false;
+                    document.body.classList.remove('cursor-ew-resize');
+                }
+
+                function moveSlider(e) {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    const clientX = e.clientX || e.touches[0].clientX;
+                    const rect = comparator.getBoundingClientRect();
+                    let x = clientX - rect.left;
+                    if (x < 0) x = 0;
+                    if (x > rect.width) x = rect.width;
+                    const percentage = (x / rect.width) * 100;
+                    slider.style.left = `${percentage}%`;
+                    afterImageContainer.style.width = `${percentage}%`;
+                }
+
+                slider.addEventListener('mousedown', startDrag);
+                window.addEventListener('mouseup', stopDrag);
+                window.addEventListener('mousemove', moveSlider);
+                slider.addEventListener('touchstart', startDrag);
+                window.addEventListener('touchend', stopDrag);
+                window.addEventListener('touchmove', moveSlider);
+            }
+        });
+    </script>
+
+</body>
+</html>
