@@ -11,15 +11,19 @@
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- AOS (Animate on Scroll) Library CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
     <!-- Custom Styles -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
         /* Style for the hero background image with spotlight effect */
         .hero-bg {
@@ -36,44 +40,71 @@
         /* Styles for the Before/After Image Comparator */
         #image-comparator {
             user-select: none; /* Prevent text selection during drag */
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 4 / 3;
         }
         #slider {
             transform: translateX(-50%); /* Center the slider handle */
         }
-        /* Style for expanding image in service cards */
+        /* Style for service card images */
         .service-card-image {
-            height: 120px; /* UPDATED Initial height */
-            transition: height 0.3s ease-in-out;
-        }
-        @media (min-width: 768px) { /* Apply hover effect only on desktop */
-            .group:hover .service-card-image {
-                height: 240px; /* UPDATED Expanded height */
-            }
+            height: 240px; 
         }
         /* Styles for Gallery Lightbox */
         #lightbox.hidden {
             display: none;
         }
-        /* Style for active city link in the footer */
-        .city-link.active {
-            background-color: #3b82f6; /* Tailwind blue-500 */
-            color: white;
-        }
-        /* Styles for Interactive SVG Map */
-        .map-dot {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background-color: #9ca3af; /* gray-400 */
+        /* Styles for Carousel */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 44px;
+            height: 44px;
             border-radius: 9999px;
-            transition: all 0.2s ease-in-out;
-            transform: translate(-50%, -50%) scale(1);
+            transition: background-color 0.3s;
         }
-        .map-dot.active {
-            background-color: #3b82f6; /* blue-500 */
-            transform: translate(-50%, -50%) scale(1.5);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background-color: rgba(0, 0, 0, 0.8);
         }
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 18px;
+            font-weight: 900;
+        }
+        .swiper-pagination-bullet {
+            background: #b9b9b9;
+            opacity: 0.7;
+        }
+        .swiper-pagination-bullet-active {
+            background: #3b82f6; /* blue-500 */
+            opacity: 1;
+        }
+        .swiper-container {
+            width: 100%;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .swiper-slide {
+            cursor: grab;
+            height: auto; /* Allow slide to grow with content */
+        }
+        .swiper-slide:active {
+            cursor: grabbing;
+        }
+        .swiper-slide .gallery-item {
+            display: block;
+            width: 100%;
+            height: 350px; /* Standardized height for the container */
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure image covers the area without distortion */
+        }
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -91,11 +122,9 @@
                 <a href="#services" class="text-gray-600 hover:text-blue-700 transition duration-300">Services</a>
                 <a href="#gallery" class="text-gray-600 hover:text-blue-700 transition duration-300">Gallery</a>
                 <a href="#testimonials" class="text-gray-600 hover:text-blue-700 transition duration-300">Testimonials</a>
-                <span class="text-gray-400">|</span>
-                <span class="font-semibold text-gray-700">Contact us: 617-291-3875 / 617-224-3026</span>
             </div>
             
-            <a href="#contact" class="hidden md:block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
+            <a href="#contact-info" class="hidden md:block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
 
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden">
@@ -114,19 +143,22 @@
             <div class="border-t my-2"></div>
             <p class="px-6 py-3 font-semibold text-gray-700">Contact: 617-291-3875</p>
             <div class="p-4">
-                <a href="#contact" class="block text-center w-full bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
+                <a href="#contact-info" class="block text-center w-full bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
             </div>
         </div>
     </header>
 
     <main>
         <!-- =========== Hero Section =========== -->
-        <section class="hero-bg text-white pt-40 pb-24 md:pt-56 md:pb-40">
+        <section class="hero-bg text-white h-[95vh] min-h-[600px] flex items-center">
             <div class="container mx-auto px-6 text-center" data-aos="fade-in" data-aos-duration="1000">
-                <span class="bg-white/10 border border-white/20 text-sm font-semibold px-4 py-2 rounded-full">33 Years of Licensed & Insured Premium Painting</span>
-                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight my-6">One & Done: Painting done right the first time, with no rework and no headaches.</h1>
-                <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-10">At One Touch Paint, we believe quality work should never need a second try. We get it right from the very first touch.</p>
-                <a href="#contact" class="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote: 617-291-3875</a>
+                <span class="bg-white/10 border border-white/20 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full inline-block">33 Years of Licensed & Insured Premium Painting</span>
+                <h1 class="text-4xl md:text-6xl leading-tight my-10">
+                    <span class="font-black">One & Done:</span>
+                    <span class="font-medium">Painting done right the first time, with no rework and no headaches.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-14">At One Touch Paint, we believe quality work should never need a second try. We get it right from the very first touch.</p>
+                <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 inline-block">Get a Free Quote: 617-291-3875</a>
             </div>
         </section>
 
@@ -138,32 +170,27 @@
                     <p class="text-gray-600 mt-4 max-w-2xl mx-auto">More than three decades of experience, official certifications, and a commitment to quality and safety in every project.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Card 1 -->
+                    <!-- Cards here... -->
                     <div class="p-8 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-5" data-aos="fade-up" data-aos-delay="100">
                         <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div>
                         <div><h3 class="text-xl font-semibold mb-2">OSHA Certified</h3><p class="text-gray-600">Ensuring safety and compliance with U.S. standards.</p></div>
                     </div>
-                    <!-- Card 2 -->
                     <div class="p-8 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-5" data-aos="fade-up" data-aos-delay="200">
                         <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg></div>
                         <div><h3 class="text-xl font-semibold mb-2">Fully Licensed & Insured</h3><p class="text-gray-600">Total peace of mind: everything is licensed and insured.</p></div>
                     </div>
-                    <!-- Card 3 -->
                     <div class="p-8 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-5" data-aos="fade-up" data-aos-delay="300">
                         <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
                         <div><h3 class="text-xl font-semibold mb-2">33+ Years of Experience</h3><p class="text-gray-600">Decades of know-how among our specialists.</p></div>
                     </div>
-                    <!-- Card 4 -->
                     <div class="p-8 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-5" data-aos="fade-up" data-aos-delay="400">
                         <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div>
                         <div><h3 class="text-xl font-semibold mb-2">On-Time, Every Time</h3><p class="text-gray-600">A real commitment to deadlines and schedules.</p></div>
                     </div>
-                    <!-- Card 5 -->
                     <div class="p-8 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-5" data-aos="fade-up" data-aos-delay="500">
                         <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></div>
                         <div><h3 class="text-xl font-semibold mb-2">Owner-Supervised</h3><p class="text-gray-600">Every job is closely monitored by the owner.</p></div>
                     </div>
-                    <!-- Card 6 -->
                     <div class="p-8 bg-gray-50 rounded-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl flex items-start space-x-5" data-aos="fade-up" data-aos-delay="600">
                         <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg></div>
                         <div><h3 class="text-xl font-semibold mb-2">Clean & Organized</h3><p class="text-gray-600">Your space delivered clean, ready to use.</p></div>
@@ -175,24 +202,23 @@
         <!-- =========== About Us Section (REORDERED) =========== -->
         <section id="about" class="py-20 md:py-28 bg-gray-50" data-aos="fade-up">
             <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-                <div data-aos="fade-right" data-aos-delay="200">
+                <div data-aos="fade-right" data-aos-delay="200" class="flex flex-col justify-center h-full">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Painting Experts Who Get It Right the First Time</h2>
                     <p class="text-gray-600 mb-5">At One Touch Paint, we don't just deliver painted walls; we deliver peace of mind. Julio and Arthur personally oversee each project, ensuring every detail is done correctly right from the first time.</p>
                     <p class="text-gray-600 mb-8">After decades in the industry, they have faced all types of challenges in residential, commercial, and industrial painting, and this practical experience is what transforms the result into a flawless finish, without rework and without headaches. Fully licensed, insured, and OSHA certified, we combine safety, professionalism, and excellence in every service.</p>
-                    <a href="#contact" class="bg-blue-600 text-white font-semibold px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
+                    <a href="#contact-info" class="bg-blue-600 text-white font-semibold px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 self-start">Get a Free Quote</a>
                 </div>
                 <!-- Before & After Image Comparator -->
-                <div data-aos="fade-left" data-aos-delay="200">
-                    <div id="image-comparator" class="relative rounded-lg shadow-xl w-full max-w-full mx-auto overflow-hidden">
-                        <!-- Before/After Labels -->
+                <div data-aos="fade-left" data-aos-delay="200" id="image-comparator-container" class="w-full">
+                    <div id="image-comparator" class="relative rounded-lg shadow-xl mx-auto overflow-hidden">
                         <div class="absolute top-2 left-2 z-10 bg-black/50 text-white text-xs font-semibold px-2 py-1 rounded">BEFORE</div>
                         <div class="absolute top-2 right-2 z-10 bg-black/50 text-white text-xs font-semibold px-2 py-1 rounded">AFTER</div>
                         
-                        <img src="depois.JPG" alt="Before painting" class="block w-full rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/d1d5db/4b5563?text=Before';">
-                        <div id="after-image-container" class="absolute top-0 left-0 h-full overflow-hidden">
-                            <img src="antes.jpg" alt="After painting" class="block h-full object-cover" style="width:100%; max-width: none; object-position: left;" onerror="this.onerror=null; this.src='https://placehold.co/800x600/3b82f6/ffffff?text=After';">
+                        <img src="depois.jpg" alt="Before painting" class="block w-full h-full object-cover rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/d1d5db/4b5563?text=Before';">
+                        <div id="after-image-container" class="absolute top-0 left-0 h-full w-1/2 overflow-hidden">
+                            <img src="antes.jpg" alt="After painting" class="block h-full w-full object-cover absolute top-0 left-0 max-w-none" style="object-position: left;">
                         </div>
-                        <div id="slider" class="absolute top-0 h-full w-1 bg-white cursor-ew-resize flex items-center justify-center">
+                        <div id="slider" class="absolute top-0 h-full w-1 bg-white cursor-ew-resize flex items-center justify-center left-1/2">
                              <div class="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-gray-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" /></svg>
                              </div>
@@ -210,7 +236,7 @@
                 </div>
                 <div class="grid md:grid-cols-2 gap-12">
                     <!-- Residential Card -->
-                    <div class="group bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out hover:shadow-2xl flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col" data-aos="fade-up" data-aos-delay="100">
                         <div class="p-8">
                             <h3 class="text-2xl font-bold mb-4">Residential Painting</h3>
                             <p class="text-gray-600 mb-6">Give your home a fresh new look. Our focus on residential painting goes beyond aesthetics; we create comfortable, modern environments with a flawless finish.</p>
@@ -227,7 +253,7 @@
                         <img src="residencial.avif" alt="Residential Painting" class="w-full object-cover service-card-image mt-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x400/3B82F6/FFFFFF?text=Residential';">
                     </div>
                     <!-- Commercial Card -->
-                    <div class="group bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out hover:shadow-2xl flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col" data-aos="fade-up" data-aos-delay="200">
                         <div class="p-8">
                             <h3 class="text-2xl font-bold mb-4">Commercial & Industrial Painting</h3>
                             <p class="text-gray-600 mb-6">Beyond standard commercial jobs, we are certified specialists in complex industrial projects, adapting our methods, techniques, and paints for the unique demands of any environment.</p>
@@ -243,32 +269,33 @@
                     </div>
                 </div>
                 <div class="text-center mt-16">
-                    <a href="#contact" class="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote for Your Project</a>
+                    <a href="#contact-info" class="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote for Your Project</a>
                 </div>
             </div>
         </section>
 
-        <!-- =========== Gallery Section (REORDERED) =========== -->
-        <section id="gallery" class="py-20 md:py-28 bg-gray-50" data-aos="fade-up">
+        <!-- =========== Gallery Section (Carousel) =========== -->
+        <section id="gallery" class="py-20 md:py-28 bg-gray-50 overflow-hidden" data-aos="fade-up">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Recent Work</h2>
                     <p class="text-gray-600 mt-4">A glimpse into the quality and craftsmanship we deliver.</p>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <a href="projeto-1.jpg" class="gallery-item overflow-hidden rounded-lg shadow-lg block" data-aos="fade-up" data-aos-delay="100">
-                        <img src="projeto-1.jpg" alt="Painting Project 1" class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/3b82f6/ffffff?text=Project+1';">
-                    </a>
-                    <a href="projeto-2.jpg" class="gallery-item overflow-hidden rounded-lg shadow-lg block" data-aos="fade-up" data-aos-delay="200">
-                        <img src="projeto-2.jpg" alt="Painting Project 2" class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/10b981/ffffff?text=Project+2';">
-                    </a>
-                    <a href="projeto-3.jpg" class="gallery-item overflow-hidden rounded-lg shadow-lg block" data-aos="fade-up" data-aos-delay="300">
-                        <img src="projeto-3.jpg" alt="Painting Project 3" class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/ef4444/ffffff?text=Project+3';">
-                    </a>
-                    <a href="projeto-4.jpg" class="gallery-item overflow-hidden rounded-lg shadow-lg block" data-aos="fade-up" data-aos-delay="400">
-                        <img src="projeto-4.jpg" alt="Painting Project 4" class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/f59e0b/ffffff?text=Project+4';">
-                    </a>
+            </div>
+             <!-- Swiper Carousel -->
+            <div class="container mx-auto relative px-4 sm:px-0">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- Slides will be injected here by JS -->
+                    </div>
                 </div>
+                <!-- Navigation Arrows -->
+                <div class="swiper-button-prev left-0 sm:left-2"></div>
+                <div class="swiper-button-next right-0 sm:right-2"></div>
+            </div>
+            <!-- Pagination Dots -->
+            <div class="container mx-auto">
+                 <div class="swiper-pagination mt-8 relative"></div>
             </div>
         </section>
 
@@ -286,79 +313,32 @@
             </div>
         </section>
 
-        <!-- =========== Contact / CTA Section =========== -->
-        <section id="contact" class="py-20 md:py-28 bg-blue-700 text-white" data-aos="fade-up">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Space?</h2>
-                        <p class="text-blue-100 mb-8">Contact us today for a free, no-obligation estimate. Let's discuss your project and how we can bring your vision to life.</p>
-                        <div class="space-y-5">
-                            <p class="flex items-center text-xl"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.518.759a11.024 11.024 0 005.176 5.176l.76-1.518a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg> 617-291-3875</p>
-                            <p class="flex items-center text-xl"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg> contact@onetouchpaintcorp.com</p>
-                        </div>
-                    </div>
-                    <div class="bg-white p-8 rounded-lg shadow-2xl">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Get a Free Quote</h3>
-                        <form action="#" method="POST">
-                            <div class="mb-5"><label for="name" class="block text-gray-700 text-sm font-bold mb-2">Full Name</label><input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required></div>
-                            <div class="mb-5"><label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label><input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required></div>
-                            <div class="mb-6"><label for="message" class="block text-gray-700 text-sm font-bold mb-2">Project Details</label><textarea id="message" name="message" rows="4" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea></div>
-                            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Send Request</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- =========== Footer =========== -->
-    <footer class="bg-gray-800 text-white">
+    <footer id="contact-info" class="bg-gray-800 text-white">
         <div class="container mx-auto px-6 py-16">
             <div class="text-center mb-12">
                 <h3 class="text-2xl font-bold">Professional painting near you</h3>
-                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">We serve clients across Massachusetts. Click on a city to highlight its location.</p>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">We serve clients in several cities in Massachusetts, offering complete solutions in painting and finishing.</p>
+                <div class="flex flex-wrap justify-center items-center gap-x-2 gap-y-2 text-gray-300 mt-8">
+                    <span>Weston</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Wellesley</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Newton</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Brookline</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Cambridge</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Needham</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Dedham</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Sherborn</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Natick</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Andover</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Concord</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Wayland</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Sudbury</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Lexington</span>
+                </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                <!-- City List -->
-                <div id="city-list" class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 text-gray-300">
-                    <a href="#" class="city-link p-2 rounded transition" data-city="andover">Andover</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="lexington">Lexington</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="concord">Concord</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="sudbury">Sudbury</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="wayland">Wayland</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="weston">Weston</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="newton">Newton</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="wellesley">Wellesley</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="natick">Natick</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="sherborn">Sherborn</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="needham">Needham</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="dedham">Dedham</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="brookline">Brookline</a>
-                    <a href="#" class="city-link p-2 rounded transition" data-city="cambridge">Cambridge</a>
-                </div>
-                <!-- Interactive SVG Map -->
-                <div id="map-container" class="relative">
-                    <img src="noun-massachusetts-5793259.png" alt="Map of Massachusetts" class="w-full h-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/4b5563?text=Map+of+MA';">
-                    <!-- Dots will be positioned here with corrected coordinates -->
-                    <div class="map-dot" data-city="andover" style="top: 14%; left: 64%;"></div>
-                    <div class="map-dot" data-city="lexington" style="top: 26%; left: 65%;"></div>
-                    <div class="map-dot" data-city="concord" style="top: 23%; left: 58%;"></div>
-                    <div class="map-dot" data-city="sudbury" style="top: 28%; left: 58%;"></div>
-                    <div class="map-dot" data-city="wayland" style="top: 30%; left: 59%;"></div>
-                    <div class="map-dot" data-city="weston" style="top: 30%; left: 61%;"></div>
-                    <div class="map-dot" data-city="newton" style="top: 31%; left: 63%;"></div>
-                    <div class="map-dot" data-city="wellesley" style="top: 32%; left: 61%;"></div>
-                    <div class="map-dot" data-city="natick" style="top: 32%; left: 59%;"></div>
-                    <div class="map-dot" data-city="sherborn" style="top: 33%; left: 58%;"></div>
-                    <div class="map-dot" data-city="needham" style="top: 32%; left: 62%;"></div>
-                    <div class="map-dot" data-city="dedham" style="top: 34%; left: 63%;"></div>
-                    <div class="map-dot" data-city="brookline" style="top: 31%; left: 66%;"></div>
-                    <div class="map-dot" data-city="cambridge" style="top: 28%; left: 68%;"></div>
-                </div>
-            </div>
-
             <div class="border-t border-gray-700 mt-12 pt-8 text-center">
                 <div class="mb-8 flex justify-center items-center gap-4">
                     <img src="osha.avif" alt="OSHA Certified" class="h-16 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/64x64/ffffff/1f2937?text=OSHA';">
@@ -377,6 +357,9 @@
 
     <!-- AOS (Animate on Scroll) Library JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Swiper.js JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -445,68 +428,83 @@
             if(lightbox) {
                 const lightboxImage = document.getElementById('lightbox-image');
                 const lightboxClose = document.getElementById('lightbox-close');
-                const galleryItems = document.querySelectorAll('.gallery-item');
 
-                galleryItems.forEach(item => {
-                    item.addEventListener('click', e => {
-                        e.preventDefault();
-                        lightboxImage.src = item.href;
-                        lightbox.classList.remove('hidden');
-                    });
-                });
-
-                lightboxClose.addEventListener('click', () => {
+                function openLightbox(src) {
+                    lightboxImage.src = src;
+                    lightbox.classList.remove('hidden');
+                }
+                
+                function closeLightbox() {
                     lightbox.classList.add('hidden');
-                });
+                }
+
+                lightboxClose.addEventListener('click', closeLightbox);
                 
                 lightbox.addEventListener('click', e => {
                     if (e.target === lightbox) {
-                        lightbox.classList.add('hidden');
+                        closeLightbox();
                     }
                 });
+                
+                // This function will be called after the carousel is created
+                window.setupLightboxForCarousel = () => {
+                    const galleryItems = document.querySelectorAll('.gallery-item');
+                    galleryItems.forEach(item => {
+                        item.addEventListener('click', e => {
+                            e.preventDefault();
+                            openLightbox(item.href);
+                        });
+                    });
+                }
             }
 
-            // Interactive SVG Map Logic
-            const cityList = document.getElementById('city-list');
-            if (cityList) {
-                const cityLinks = cityList.querySelectorAll('.city-link');
-                const mapDots = document.querySelectorAll('.map-dot');
-
-                function setActiveCity(city) {
-                    // Update links
-                    cityLinks.forEach(link => {
-                        if (link.dataset.city === city) {
-                            link.classList.add('active');
-                        } else {
-                            link.classList.remove('active');
-                        }
-                    });
-
-                    // Update dots
-                    mapDots.forEach(dot => {
-                        if (dot.dataset.city === city) {
-                            dot.classList.add('active');
-                        } else {
-                            dot.classList.remove('active');
-                        }
-                    });
+            // Carousel Logic
+            const swiperWrapper = document.querySelector('.swiper-wrapper');
+            if (swiperWrapper) {
+                for (let i = 1; i <= 11; i++) {
+                    const slide = `
+                        <div class="swiper-slide">
+                            <a href="carousel/slide${i}.jpg" class="gallery-item block overflow-hidden rounded-lg shadow-lg">
+                                <img src="carousel/slide${i}.jpg" alt="Project ${i}" class="transition duration-300 ease-in-out hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/ffffff?text=Project+${i}';">
+                            </a>
+                        </div>
+                    `;
+                    swiperWrapper.innerHTML += slide;
                 }
 
-                // Set the first city as active by default
-                if (cityLinks.length > 0) {
-                    setActiveCity(cityLinks[0].dataset.city);
-                }
-
-                // Add click event listeners
-                cityLinks.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const city = this.dataset.city;
-                        setActiveCity(city);
-                    });
+                const swiper = new Swiper('.swiper-container', {
+                    loop: true,
+                    grabCursor: true,
+                    spaceBetween: 20,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    breakpoints: {
+                        320: {
+                            slidesPerView: 1,
+                            spaceBetween: 10
+                        },
+                        640: {
+                            slidesPerView: 2,
+                            spaceBetween: 20
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 30
+                        }
+                    }
                 });
+                
+                // Re-initialize lightbox for the newly created slides
+                if(window.setupLightboxForCarousel) {
+                    window.setupLightboxForCarousel();
+                }
             }
-
         });
     </script>
 
