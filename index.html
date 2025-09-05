@@ -82,7 +82,6 @@
             background: #3b82f6; /* blue-500 */
             opacity: 1;
         }
-        /* CORREÇÃO: Removido padding que causava scroll horizontal no mobile */
         .swiper-container {
             width: 100%;
         }
@@ -149,7 +148,6 @@
 
     <main>
         <!-- =========== Hero Section =========== -->
-        <!-- CORREÇÃO: Adicionado padding-top (pt-32) para empurrar o conteúdo para baixo do header fixo em todas as telas -->
         <section class="hero-bg text-white h-[95vh] min-h-[600px] flex items-center pt-32">
             <div class="container mx-auto px-6 text-center" data-aos="fade-in" data-aos-duration="1000">
                 <span class="bg-white/10 border border-white/20 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full inline-block">33 Years of Licensed & Insured Premium Painting</span>
@@ -158,7 +156,6 @@
                     <span class="font-medium">Painting done right the first time, with no rework and no headaches.</span>
                 </h1>
                 <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-14">At One Touch Paint, we believe quality work should never need a second try. We get it right from the very first touch.</p>
-                <!-- CORREÇÃO: Adicionado whitespace-nowrap para impedir quebra de linha no botão -->
                 <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 inline-block whitespace-nowrap">Get a Free Quote: 617-291-3875</a>
             </div>
         </section>
@@ -207,7 +204,6 @@
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Painting Experts Who Get It Right the First Time</h2>
                     <p class="text-gray-600 mb-5">At One Touch Paint, we don't just deliver painted walls; we deliver peace of mind. Julio and Arthur personally oversee each project, ensuring every detail is done correctly right from the first time.</p>
                     <p class="text-gray-600 mb-8">After decades in the industry, they have faced all types of challenges in residential, commercial, and industrial painting, and this practical experience is what transforms the result into a flawless finish, without rework and without headaches. Fully licensed, insured, and OSHA certified, we combine safety, professionalism, and excellence in every service.</p>
-                    <!-- CORREÇÃO: Ajustado padding do botão para consistência responsiva -->
                     <a href="#contact-info" class="bg-blue-600 text-white font-semibold px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 self-start">Get a Free Quote</a>
                 </div>
                 <!-- Before & After Image Comparator -->
@@ -271,7 +267,6 @@
                     </div>
                 </div>
                 <div class="text-center mt-16">
-                    <!-- CORREÇÃO: Adicionado whitespace-nowrap e classes responsivas para impedir quebra de linha -->
                     <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 whitespace-nowrap">Get a Free Quote for Your Project</a>
                 </div>
             </div>
@@ -344,7 +339,6 @@
             
             <div class="border-t border-gray-700 mt-12 pt-8 text-center">
                 <div class="mb-8 flex justify-center items-center gap-4">
-                    <!-- CORREÇÃO: Alterado para .png conforme código de exemplo fornecido -->
                     <img src="osha.png" alt="OSHA Certified" class="h-16 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/64x64/ffffff/1f2937?text=OSHA';">
                     <p class="text-gray-400 text-left text-sm">Proudly OSHA Certified,<br>committed to the highest safety standards.</p>
                 </div>
@@ -394,14 +388,33 @@
                 }
 
                 function resizeAfterImage() {
-                    afterImage.style.width = `${comparator.offsetWidth}px`;
+                    // Ensure comparator has a valid width before calculating
+                    if (comparator.offsetWidth > 0) {
+                        afterImage.style.width = `${comparator.offsetWidth}px`;
+                    }
                 }
                 
-                // CORREÇÃO: Adicionado 'load' para garantir que o cálculo da largura seja feito após a página carregar completamente
-                window.addEventListener('load', resizeAfterImage);
-                window.addEventListener('resize', resizeAfterImage);
-                resizeAfterImage();
                 setInitialPosition();
+
+                // Use an Intersection Observer to resize the image only when it becomes visible.
+                // This definitively solves the race condition causing the horizontal scroll on initial load.
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries, obs) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                resizeAfterImage();
+                                obs.unobserve(entry.target); // Optimize by unobserving after first intersection
+                            }
+                        });
+                    }, { threshold: 0.01 });
+                    observer.observe(comparator);
+                } else {
+                    // Fallback for very old browsers
+                    window.addEventListener('load', resizeAfterImage);
+                }
+
+                // Always listen for resize events for responsiveness
+                window.addEventListener('resize', resizeAfterImage);
 
                 let isDragging = false;
 
