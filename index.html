@@ -158,7 +158,8 @@
                     <span class="font-medium">Painting done right the first time, with no rework and no headaches.</span>
                 </h1>
                 <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-14">At One Touch Paint, we believe quality work should never need a second try. We get it right from the very first touch.</p>
-                <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 inline-block">Get a Free Quote: 617-291-3875</a>
+                <!-- CORREÇÃO: Adicionado whitespace-nowrap para impedir quebra de linha no botão -->
+                <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 inline-block whitespace-nowrap">Get a Free Quote: 617-291-3875</a>
             </div>
         </section>
 
@@ -206,7 +207,8 @@
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Painting Experts Who Get It Right the First Time</h2>
                     <p class="text-gray-600 mb-5">At One Touch Paint, we don't just deliver painted walls; we deliver peace of mind. Julio and Arthur personally oversee each project, ensuring every detail is done correctly right from the first time.</p>
                     <p class="text-gray-600 mb-8">After decades in the industry, they have faced all types of challenges in residential, commercial, and industrial painting, and this practical experience is what transforms the result into a flawless finish, without rework and without headaches. Fully licensed, insured, and OSHA certified, we combine safety, professionalism, and excellence in every service.</p>
-                    <a href="#contact-info" class="bg-blue-600 text-white font-semibold px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 self-start">Get a Free Quote</a>
+                    <!-- CORREÇÃO: Ajustado padding do botão para consistência responsiva -->
+                    <a href="#contact-info" class="bg-blue-600 text-white font-semibold px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 self-start">Get a Free Quote</a>
                 </div>
                 <!-- Before & After Image Comparator -->
                 <div data-aos="fade-left" data-aos-delay="200" id="image-comparator-container" class="w-full">
@@ -269,7 +271,8 @@
                     </div>
                 </div>
                 <div class="text-center mt-16">
-                    <a href="#contact-info" class="bg-blue-600 text-white font-bold text-lg px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote for Your Project</a>
+                    <!-- CORREÇÃO: Adicionado whitespace-nowrap e classes responsivas para impedir quebra de linha -->
+                    <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 whitespace-nowrap">Get a Free Quote for Your Project</a>
                 </div>
             </div>
         </section>
@@ -341,6 +344,7 @@
             
             <div class="border-t border-gray-700 mt-12 pt-8 text-center">
                 <div class="mb-8 flex justify-center items-center gap-4">
+                    <!-- CORREÇÃO: Alterado para .png conforme código de exemplo fornecido -->
                     <img src="osha.png" alt="OSHA Certified" class="h-16 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/64x64/ffffff/1f2937?text=OSHA';">
                     <p class="text-gray-400 text-left text-sm">Proudly OSHA Certified,<br>committed to the highest safety standards.</p>
                 </div>
@@ -393,6 +397,8 @@
                     afterImage.style.width = `${comparator.offsetWidth}px`;
                 }
                 
+                // CORREÇÃO: Adicionado 'load' para garantir que o cálculo da largura seja feito após a página carregar completamente
+                window.addEventListener('load', resizeAfterImage);
                 window.addEventListener('resize', resizeAfterImage);
                 resizeAfterImage();
                 setInitialPosition();
@@ -510,3 +516,4 @@
 
 </body>
 </html>
+
