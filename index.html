@@ -3,23 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="One Touch Paint - Licensed & Insured Painting Services in Massachusetts. 33 Years of Experience. Residential, Commercial & Industrial Painting. Get a Free Quote!">
     <title>One Touch Paint - Painting Done Right The First Time</title>
-    
-    <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- AOS (Animate on Scroll) Library CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
-    <!-- Custom Styles -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -43,7 +34,7 @@
             width: 100%;
             height: 100%;
             aspect-ratio: 4 / 3;
-            overflow: hidden; /* Garante que nada vaze */
+            overflow: hidden; 
         }
         #slider {
             transform: translateX(-50%); /* Center the slider handle */
@@ -104,7 +95,7 @@
             object-fit: cover; /* Ensure image covers the area without distortion */
         }
 
-        /* CORREÇÃO CSS: Com base na análise do usuário para previnir overflow */
+        
         #image-comparator-container {
           overflow-x: hidden;
         }
@@ -125,7 +116,6 @@
     <!-- =========== Header / Navigation =========== -->
     <header id="header" class="bg-white shadow-md fixed top-0 left-0 w-full z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <!-- UPDATED & ENLARGED LOGO -->
             <a href="#">
                 <img src="logo-one-touch.avif" alt="One Touch Paint Logo" class="h-24 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/280x96/1d4ed8/ffffff?text=One+Touch+Paint';">
             </a>
@@ -162,7 +152,7 @@
     </header>
 
     <main>
-        <!-- =========== Hero Section =========== -->
+        <!--  Hero Section  -->
         <section class="hero-bg text-white h-[95vh] min-h-[600px] flex items-center pt-32">
             <div class="container mx-auto px-6 text-center" data-aos="fade-in" data-aos-duration="1000">
                 <span class="bg-white/10 border border-white/20 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full inline-block">33 Years of Licensed & Insured Premium Painting</span>
@@ -175,7 +165,7 @@
             </div>
         </section>
 
-        <!-- =========== Why Choose Us Section =========== -->
+        <!--  Why Choose Us Section  -->
         <section class="py-20 md:py-28 bg-white" data-aos="fade-up">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -212,7 +202,7 @@
             </div>
         </section>
 
-        <!-- =========== About Us Section (MOBILE) =========== -->
+        <!--  About Us Section (MOBILE)  -->
         <section id="about-mobile" class="py-20 bg-gray-50 md:hidden" data-aos="fade-up">
             <div class="container mx-auto px-6 grid grid-cols-1 gap-12 items-center">
                 <!-- Text Content -->
@@ -236,7 +226,7 @@
             </div>
         </section>
 
-        <!-- =========== About Us Section (Visible only on Desktop) =========== -->
+        <!--  About Us Section (Visible only on Desktop)  -->
         <section id="about" class="py-20 md:py-28 bg-gray-50 hidden md:block" data-aos="fade-up">
             <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
                 <div data-aos="fade-right" data-aos-delay="200" class="flex flex-col justify-center h-full">
@@ -265,7 +255,7 @@
             </div>
         </section>
         
-        <!-- =========== Services Section (REORDERED) =========== -->
+        <!--  Services Section (REORDERED)  -->
         <section id="services" class="py-20 md:py-28 bg-white" data-aos="fade-up">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -311,7 +301,7 @@
             </div>
         </section>
 
-        <!-- =========== Gallery Section (Carousel) =========== -->
+        <!--  Gallery Section (Carousel)  -->
         <section id="gallery" class="py-20 md:py-28 bg-gray-50 overflow-hidden" data-aos="fade-up">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -336,7 +326,7 @@
             </div>
         </section>
 
-        <!-- =========== Testimonials Section =========== -->
+        <!--  Testimonials Section  -->
         <section id="testimonials" class="py-20 md:py-28 bg-white" data-aos="fade-up">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -352,7 +342,7 @@
 
     </main>
 
-    <!-- =========== Footer =========== -->
+    <!--  Footer  -->
     <footer id="contact-info" class="bg-gray-800 text-white">
         <div class="container mx-auto px-6 py-16">
             <div class="text-center mb-12">
@@ -386,13 +376,12 @@
         </div>
     </footer>
 
-    <!-- =========== Gallery Lightbox =========== -->
+    <!--  Gallery Lightbox  -->
     <div id="lightbox" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 transition-opacity duration-300">
         <button id="lightbox-close" class="absolute top-4 right-6 text-white text-5xl opacity-80 hover:opacity-100">&times;</button>
         <img id="lightbox-image" src="" alt="Enlarged gallery image" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl">
     </div>
 
-    <!-- OTIMIZAÇÃO: Adicionado 'defer' para carregamento assíncrono não bloqueante -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
 
@@ -425,13 +414,13 @@
                 const afterImage = document.getElementById('after-image');
 
                 function resizeAfterImage() {
-                    // Garante que o comparador tenha uma largura antes de calcular
+                    
                     if (comparator.offsetWidth > 0) {
                         afterImage.style.width = `${comparator.offsetWidth}px`;
                     }
                 }
                 
-                // Executa no carregamento completo e no redimensionamento
+                
                 window.addEventListener('load', resizeAfterImage);
                 window.addEventListener('resize', resizeAfterImage);
                 resizeAfterImage(); // Executa uma vez no início
