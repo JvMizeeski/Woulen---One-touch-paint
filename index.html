@@ -394,27 +394,20 @@
                     }
                 }
                 
-                setInitialPosition();
-
-                // Use an Intersection Observer to resize the image only when it becomes visible.
-                // This definitively solves the race condition causing the horizontal scroll on initial load.
-                if ('IntersectionObserver' in window) {
-                    const observer = new IntersectionObserver((entries, obs) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                resizeAfterImage();
-                                obs.unobserve(entry.target); // Optimize by unobserving after first intersection
-                            }
-                        });
-                    }, { threshold: 0.01 });
-                    observer.observe(comparator);
-                } else {
-                    // Fallback for very old browsers
-                    window.addEventListener('load', resizeAfterImage);
-                }
-
-                // Always listen for resize events for responsiveness
+                // CORREÇÃO DEFINITIVA: Chamar a função de redimensionamento em múltiplos estágios 
+                // para garantir que o layout não quebre antes do script ser executado.
+                
+                // 1. Chamar imediatamente para tentar corrigir o mais rápido possível.
+                resizeAfterImage();
+                
+                // 2. Chamar novamente quando toda a página, incluindo imagens e fontes, estiver carregada.
+                // Este é o gatilho mais confiável para obter as dimensões corretas.
+                window.addEventListener('load', resizeAfterImage);
+                
+                // 3. Manter o listener de 'resize' para responsividade.
                 window.addEventListener('resize', resizeAfterImage);
+                
+                setInitialPosition();
 
                 let isDragging = false;
 
