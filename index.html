@@ -82,10 +82,9 @@
             background: #3b82f6; /* blue-500 */
             opacity: 1;
         }
+        /* CORREÇÃO: Removido padding que causava scroll horizontal no mobile */
         .swiper-container {
             width: 100%;
-            padding-left: 10px;
-            padding-right: 10px;
         }
         .swiper-slide {
             cursor: grab;
@@ -150,7 +149,8 @@
 
     <main>
         <!-- =========== Hero Section =========== -->
-        <section class="hero-bg text-white h-[95vh] min-h-[600px] flex items-center">
+        <!-- CORREÇÃO: Adicionado padding-top (pt-32) para empurrar o conteúdo para baixo do header fixo em todas as telas -->
+        <section class="hero-bg text-white h-[95vh] min-h-[600px] flex items-center pt-32">
             <div class="container mx-auto px-6 text-center" data-aos="fade-in" data-aos-duration="1000">
                 <span class="bg-white/10 border border-white/20 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full inline-block">33 Years of Licensed & Insured Premium Painting</span>
                 <h1 class="text-4xl md:text-6xl leading-tight my-10">
@@ -219,9 +219,9 @@
                             <img src="antes.jpg" alt="After painting" class="block h-full w-full object-cover absolute top-0 left-0 max-w-none" style="object-position: left;">
                         </div>
                         <div id="slider" class="absolute top-0 h-full w-1 bg-white cursor-ew-resize flex items-center justify-center left-1/2">
-                             <div class="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-gray-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" /></svg>
-                             </div>
+                                <div class="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-gray-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" /></svg>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -341,7 +341,7 @@
             
             <div class="border-t border-gray-700 mt-12 pt-8 text-center">
                 <div class="mb-8 flex justify-center items-center gap-4">
-                    <img src="osha.avif" alt="OSHA Certified" class="h-16 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/64x64/ffffff/1f2937?text=OSHA';">
+                    <img src="osha.png" alt="OSHA Certified" class="h-16 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/64x64/ffffff/1f2937?text=OSHA';">
                     <p class="text-gray-400 text-left text-sm">Proudly OSHA Certified,<br>committed to the highest safety standards.</p>
                 </div>
                  <p class="text-gray-400">&copy; 2025 by One Touch Paint Services Corp. All rights reserved.</p>
@@ -510,4 +510,3 @@
 
 </body>
 </html>
-
