@@ -43,6 +43,7 @@
             width: 100%;
             height: 100%;
             aspect-ratio: 4 / 3;
+            overflow: hidden; /* Garante que nada vaze */
         }
         #slider {
             transform: translateX(-50%); /* Center the slider handle */
@@ -103,6 +104,20 @@
             object-fit: cover; /* Ensure image covers the area without distortion */
         }
 
+        /* CORREÇÃO CSS: Com base na análise do usuário para previnir overflow */
+        #image-comparator-container {
+          overflow-x: hidden;
+        }
+        #image-comparator {
+          max-width: 100%;
+          overflow: hidden;
+        }
+        #after-image-container {
+          max-width: 100%;
+        }
+        #slider {
+          max-width: 100%;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -134,7 +149,7 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white">
-            <a href="#about" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">About Us</a>
+            <a href="#about-mobile" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">About Us</a>
             <a href="#services" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Services</a>
             <a href="#gallery" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Gallery</a>
             <a href="#testimonials" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Testimonials</a>
@@ -156,7 +171,7 @@
                     <span class="font-medium">Painting done right the first time, with no rework and no headaches.</span>
                 </h1>
                 <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-14">At One Touch Paint, we believe quality work should never need a second try. We get it right from the very first touch.</p>
-                <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 inline-block whitespace-nowrap">Get a Free Quote: 617-291-3875</a>
+                <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 inline-block">Get a Free Quote: 617-291-3875</a>
             </div>
         </section>
 
@@ -197,8 +212,32 @@
             </div>
         </section>
 
-        <!-- =========== About Us Section (REORDERED) =========== -->
-        <section id="about" class="py-20 md:py-28 bg-gray-50" data-aos="fade-up">
+        <!-- =========== About Us Section (MOBILE) =========== -->
+        <section id="about-mobile" class="py-20 bg-gray-50 md:hidden" data-aos="fade-up">
+            <div class="container mx-auto px-6 grid grid-cols-1 gap-12 items-center">
+                <!-- Text Content -->
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Painting Experts Who Get It Right the First Time</h2>
+                    <p class="text-gray-600 mb-5">At One Touch Paint, we don't just deliver painted walls; we deliver peace of mind. Julio and Arthur personally oversee each project, ensuring every detail is done correctly right from the first time.</p>
+                    <p class="text-gray-600 mb-8">After decades in the industry, they have faced all types of challenges in residential, commercial, and industrial painting, and this practical experience is what transforms the result into a flawless finish, without rework and without headaches. Fully licensed, insured, and OSHA certified, we combine safety, professionalism, and excellence in every service.</p>
+                    <a href="#contact-info" class="bg-blue-600 text-white font-semibold px-6 py-4 rounded-lg hover:bg-blue-700 transition duration-300 self-start">Get a Free Quote</a>
+                </div>
+                <!-- Static Images for Mobile -->
+                <div class="space-y-8">
+                    <div>
+                        <div class="mb-2 text-center bg-gray-800 text-white text-sm font-semibold px-3 py-1 rounded-md inline-block">BEFORE</div>
+                        <img src="antes.jpg" alt="Before painting" class="block w-full h-auto object-cover rounded-lg shadow-xl" onerror="this.onerror=null; this.src='https://placehold.co/800x600/d1d5db/4b5563?text=Before'; ">
+                    </div>
+                    <div>
+                        <div class="mb-2 text-center bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded-md inline-block">AFTER</div>
+                        <img src="depois.JPG" alt="After painting" class="block w-full h-auto object-cover rounded-lg shadow-xl" onerror="this.onerror=null; this.src='https://placehold.co/800x600/3b82f6/ffffff?text=After'; ">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========== About Us Section (Visible only on Desktop) =========== -->
+        <section id="about" class="py-20 md:py-28 bg-gray-50 hidden md:block" data-aos="fade-up">
             <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
                 <div data-aos="fade-right" data-aos-delay="200" class="flex flex-col justify-center h-full">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Painting Experts Who Get It Right the First Time</h2>
@@ -208,13 +247,13 @@
                 </div>
                 <!-- Before & After Image Comparator -->
                 <div data-aos="fade-left" data-aos-delay="200" id="image-comparator-container" class="w-full">
-                    <div id="image-comparator" class="relative rounded-lg shadow-xl mx-auto overflow-hidden">
+                    <div id="image-comparator" class="relative rounded-lg shadow-xl mx-auto">
                         <div class="absolute top-2 left-2 z-10 bg-black/50 text-white text-xs font-semibold px-2 py-1 rounded">BEFORE</div>
                         <div class="absolute top-2 right-2 z-10 bg-black/50 text-white text-xs font-semibold px-2 py-1 rounded">AFTER</div>
                         
                         <img src="depois.JPG" alt="Before painting" class="block w-full h-full object-cover rounded-lg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/d1d5db/4b5563?text=Before'; ">
                         <div id="after-image-container" class="absolute top-0 left-0 h-full w-1/2 overflow-hidden">
-                            <img src="antes.jpg" alt="After painting" class="block h-full w-full object-cover absolute top-0 left-0 max-w-none" style="object-position: left;">
+                            <img id="after-image" src="antes.jpg" alt="After painting" class="block h-full w-full object-cover absolute top-0 left-0 max-w-none" style="object-position: left;">
                         </div>
                         <div id="slider" class="absolute top-0 h-full w-1 bg-white cursor-ew-resize flex items-center justify-center left-1/2">
                                 <div class="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-gray-600">
@@ -267,7 +306,7 @@
                     </div>
                 </div>
                 <div class="text-center mt-16">
-                    <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 whitespace-nowrap">Get a Free Quote for Your Project</a>
+                    <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote for Your Project</a>
                 </div>
             </div>
         </section>
@@ -353,11 +392,9 @@
         <img id="lightbox-image" src="" alt="Enlarged gallery image" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl">
     </div>
 
-    <!-- AOS (Animate on Scroll) Library JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- Swiper.js JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- OTIMIZAÇÃO: Adicionado 'defer' para carregamento assíncrono não bloqueante -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -371,44 +408,34 @@
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-            const navLinks = mobileMenu.querySelectorAll('a[href^="#"]');
-            navLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+            const navLinks = mobileMenu.querySelectorAll('a'); 
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if(link.getAttribute('href').startsWith('#')) {
+                       mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
 
             // Before & After Image Comparator Logic
             const comparator = document.getElementById('image-comparator');
             if (comparator) {
                 const slider = document.getElementById('slider');
                 const afterImageContainer = document.getElementById('after-image-container');
-                const afterImage = afterImageContainer.querySelector('img');
-
-                function setInitialPosition() {
-                    const initialPercentage = 50;
-                    slider.style.left = `${initialPercentage}%`;
-                    afterImageContainer.style.width = `${initialPercentage}%`;
-                }
+                const afterImage = document.getElementById('after-image');
 
                 function resizeAfterImage() {
-                    // Ensure comparator has a valid width before calculating
+                    // Garante que o comparador tenha uma largura antes de calcular
                     if (comparator.offsetWidth > 0) {
                         afterImage.style.width = `${comparator.offsetWidth}px`;
                     }
                 }
                 
-                // CORREÇÃO DEFINITIVA: Chamar a função de redimensionamento em múltiplos estágios 
-                // para garantir que o layout não quebre antes do script ser executado.
-                
-                // 1. Chamar imediatamente para tentar corrigir o mais rápido possível.
-                resizeAfterImage();
-                
-                // 2. Chamar novamente quando toda a página, incluindo imagens e fontes, estiver carregada.
-                // Este é o gatilho mais confiável para obter as dimensões corretas.
+                // Executa no carregamento completo e no redimensionamento
                 window.addEventListener('load', resizeAfterImage);
-                
-                // 3. Manter o listener de 'resize' para responsividade.
                 window.addEventListener('resize', resizeAfterImage);
+                resizeAfterImage(); // Executa uma vez no início
                 
-                setInitialPosition();
-
                 let isDragging = false;
 
                 function startDrag(e) { isDragging = true; document.body.classList.add('cursor-ew-resize'); }
@@ -458,7 +485,6 @@
                     }
                 });
                 
-                // This function will be called after the carousel is created
                 window.setupLightboxForCarousel = () => {
                     const galleryItems = document.querySelectorAll('.gallery-item');
                     galleryItems.forEach(item => {
@@ -477,7 +503,8 @@
                     const slide = `
                         <div class="swiper-slide">
                             <a href="carousel/slide${i}.jpg" class="gallery-item block overflow-hidden rounded-lg shadow-lg">
-                                <img src="carousel/slide${i}.jpg" alt="Project ${i}" class="transition duration-300 ease-in-out hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/ffffff?text=Project+${i}';">
+                                <!-- OTIMIZAÇÃO: Adicionado loading="lazy" para carregamento sob demanda -->
+                                <img loading="lazy" src="carousel/slide${i}.jpg" alt="Project ${i}" class="transition duration-300 ease-in-out hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/ffffff?text=Project+${i}';">
                             </a>
                         </div>
                     `;
@@ -512,7 +539,6 @@
                     }
                 });
                 
-                // Re-initialize lightbox for the newly created slides
                 if(window.setupLightboxForCarousel) {
                     window.setupLightboxForCarousel();
                 }
