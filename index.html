@@ -18,15 +18,22 @@
         }
         /* Style for the hero background image with spotlight effect */
         .hero-bg {
-            background-image: 
-                /* New spotlight effect */
-                radial-gradient(ellipse at 50% 100%, rgba(147, 197, 253, 0.15) 0%, rgba(147, 197, 253, 0) 50%),
-                /* Dark overlay */
-                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                /* Background image */
-                url('https://static.wixstatic.com/media/48ad6c_d04582a3869f464bb7d877e855493543~mv2.jpg/v1/fill/w_1745,h_618,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/48ad6c_d04582a3869f464bb7d877e855493543~mv2.jpg');
             background-size: cover;
             background-position: center;
+            /* Mobile-first background */
+            background-image: 
+                radial-gradient(ellipse at 50% 100%, rgba(147, 197, 253, 0.15) 0%, rgba(147, 197, 253, 0) 50%),
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('new-background-mobile.jpg');
+        }
+        /* Desktop background */
+        @media (min-width: 768px) {
+            .hero-bg {
+                background-image: 
+                    radial-gradient(ellipse at 50% 100%, rgba(147, 197, 253, 0.15) 0%, rgba(147, 197, 253, 0) 50%),
+                    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                    url('new-background.jpg');
+            }
         }
         /* Styles for the Before/After Image Comparator */
         #image-comparator {
@@ -114,7 +121,7 @@
 <body class="bg-gray-50 text-gray-800">
 
     <!-- =========== Header / Navigation =========== -->
-    <header id="header" class="bg-white shadow-md fixed top-0 left-0 w-full z-50">
+    <header id="header" class="bg-white shadow-md w-full z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#">
                 <img src="logo-one-touch.avif" alt="One Touch Paint Logo" class="h-24 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/280x96/1d4ed8/ffffff?text=One+Touch+Paint';">
@@ -127,7 +134,7 @@
                 <a href="#testimonials" class="text-gray-600 hover:text-blue-700 transition duration-300">Testimonials</a>
             </div>
             
-            <a href="#contact-info" class="hidden md:block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
+            <a href="#contact-form" class="hidden md:block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
 
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden">
@@ -146,22 +153,22 @@
             <div class="border-t my-2"></div>
             <p class="px-6 py-3 font-semibold text-gray-700">Contact: 617-291-3875</p>
             <div class="p-4">
-                <a href="#contact-info" class="block text-center w-full bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
+                <a href="#contact-form" class="block text-center w-full bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
             </div>
         </div>
     </header>
 
     <main>
         <!--  Hero Section  -->
-        <section class="hero-bg text-white h-[95vh] min-h-[600px] flex items-center pt-32">
+        <section class="hero-bg text-white h-[95vh] min-h-[600px] flex items-center">
             <div class="container mx-auto px-6 text-center" data-aos="fade-in" data-aos-duration="1000">
                 <span class="bg-white/10 border border-white/20 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full inline-block">33 Years of Licensed & Insured Premium Painting</span>
                 <h1 class="text-4xl md:text-6xl leading-tight my-10">
                     <span class="font-black">One & Done:</span>
-                    <span class="font-medium">Painting done right the first time, with no rework and no headaches.</span>
+                    <span class="font-medium">Painting done right the first time, <br> with no rework and no headaches.</span>
                 </h1>
                 <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-14">At One Touch Paint, we believe quality work should never need a second try. We get it right from the very first touch.</p>
-                <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 inline-block">Get a Free Quote: 617-291-3875</a>
+                <a href="#contact-form" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 inline-block">Get a Free Quote: 617-291-3875</a>
             </div>
         </section>
 
@@ -210,7 +217,6 @@
                     <h2 class="text-3xl font-bold text-gray-800 mb-6">Painting Experts Who Get It Right the First Time</h2>
                     <p class="text-gray-600 mb-5">At One Touch Paint, we don't just deliver painted walls; we deliver peace of mind. Julio and Arthur personally oversee each project, ensuring every detail is done correctly right from the first time.</p>
                     <p class="text-gray-600 mb-8">After decades in the industry, they have faced all types of challenges in residential, commercial, and industrial painting, and this practical experience is what transforms the result into a flawless finish, without rework and without headaches. Fully licensed, insured, and OSHA certified, we combine safety, professionalism, and excellence in every service.</p>
-                    <a href="#contact-info" class="bg-blue-600 text-white font-semibold px-6 py-4 rounded-lg hover:bg-blue-700 transition duration-300 self-start">Get a Free Quote</a>
                 </div>
                 <!-- Static Images for Mobile -->
                 <div class="space-y-8">
@@ -223,6 +229,10 @@
                         <img src="depois.JPG" alt="After painting" class="block w-full h-auto object-cover rounded-lg shadow-xl" onerror="this.onerror=null; this.src='https://placehold.co/800x600/3b82f6/ffffff?text=After'; ">
                     </div>
                 </div>
+                <!-- Button moved here -->
+                <div class="mt-8">
+                    <a href="#contact-form" class="bg-blue-600 text-white font-semibold px-6 py-4 rounded-lg hover:bg-blue-700 transition duration-300 w-full block text-center">Get a Free Quote</a>
+                </div>
             </div>
         </section>
 
@@ -230,10 +240,10 @@
         <section id="about" class="py-20 md:py-28 bg-gray-50 hidden md:block" data-aos="fade-up">
             <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
                 <div data-aos="fade-right" data-aos-delay="200" class="flex flex-col justify-center h-full">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Painting Experts Who Get It Right the First Time</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Painting Experts Who Get <br> It Right the First Time</h2>
                     <p class="text-gray-600 mb-5">At One Touch Paint, we don't just deliver painted walls; we deliver peace of mind. Julio and Arthur personally oversee each project, ensuring every detail is done correctly right from the first time.</p>
                     <p class="text-gray-600 mb-8">After decades in the industry, they have faced all types of challenges in residential, commercial, and industrial painting, and this practical experience is what transforms the result into a flawless finish, without rework and without headaches. Fully licensed, insured, and OSHA certified, we combine safety, professionalism, and excellence in every service.</p>
-                    <a href="#contact-info" class="bg-blue-600 text-white font-semibold px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 self-start">Get a Free Quote</a>
+                    <a href="#contact-form" class="bg-blue-600 text-white font-semibold px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 self-start">Get a Free Quote</a>
                 </div>
                 <!-- Before & After Image Comparator -->
                 <div data-aos="fade-left" data-aos-delay="200" id="image-comparator-container" class="w-full">
@@ -296,7 +306,7 @@
                     </div>
                 </div>
                 <div class="text-center mt-16">
-                    <a href="#contact-info" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote for Your Project</a>
+                    <a href="#contact-form" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote for Your Project</a>
                 </div>
             </div>
         </section>
@@ -330,7 +340,8 @@
         <section id="testimonials" class="py-20 md:py-28 bg-white" data-aos="fade-up">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Client Testimonials</h2>
+                    <span class="bg-blue-100 text-blue-800 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full inline-block">Testimonials</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-4">Hear it directly from your neighbors <br> in Massachusetts</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div class="bg-gray-50 p-8 rounded-lg shadow-md transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100"><p class="text-gray-600 mb-6">"One Touch Paint Services Corp. exceeded my expectations with their exquisite carpentry work. I highly recommend their services and look forward to working with them on future projects."</p><p class="font-bold text-gray-800">- Dave Reddington</p></div>
@@ -342,10 +353,10 @@
 
     </main>
 
-    <!--  Footer  -->
-    <footer id="contact-info" class="bg-gray-800 text-white">
+    <!--  Locations Section -->
+    <section id="locations" class="bg-gray-800 text-white">
         <div class="container mx-auto px-6 py-16">
-            <div class="text-center mb-12">
+            <div class="text-center">
                 <h3 class="text-2xl font-bold">Professional painting near you</h3>
                 <p class="text-gray-400 mt-4 max-w-2xl mx-auto">We serve clients in several cities in Massachusetts, offering complete solutions in painting and finishing.</p>
                 <div class="flex flex-wrap justify-center items-center gap-x-2 gap-y-2 text-gray-300 mt-8">
@@ -355,7 +366,9 @@
                     <span>Brookline</span><span class="text-gray-600 mx-2">&bull;</span>
                     <span>Cambridge</span><span class="text-gray-600 mx-2">&bull;</span>
                     <span>Needham</span><span class="text-gray-600 mx-2">&bull;</span>
-                    <span>Dedham</span><span class="text-gray-600 mx-2">&bull;</span>
+                    <span>Dedham</span>
+                    <div class="w-full hidden md:block h-2"></div>
+                    <span class="text-gray-600 mx-2 hidden md:inline">&bull;</span>
                     <span>Sherborn</span><span class="text-gray-600 mx-2">&bull;</span>
                     <span>Natick</span><span class="text-gray-600 mx-2">&bull;</span>
                     <span>Andover</span><span class="text-gray-600 mx-2">&bull;</span>
@@ -365,8 +378,44 @@
                     <span>Lexington</span>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form" class="bg-blue-700 py-20 md:py-28">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white">Get a Free Quote Today</h2>
+            <p class="text-blue-200 mt-4 max-w-2xl mx-auto">Fill out the form below and we'll get back to you as soon as possible to discuss your project.</p>
+            <form action="#" method="POST" class="mt-12 max-w-xl mx-auto text-left">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-blue-100">Full Name</label>
+                        <input type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full px-4 py-3 rounded-md bg-blue-800 border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700 focus:ring-white" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-blue-100">Email Address</label>
+                        <input type="email" name="email" id="email" autocomplete="email" class="mt-1 block w-full px-4 py-3 rounded-md bg-blue-800 border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700 focus:ring-white" required>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <label for="phone" class="block text-sm font-medium text-blue-100">Phone Number</label>
+                    <input type="tel" name="phone" id="phone" autocomplete="tel" class="mt-1 block w-full px-4 py-3 rounded-md bg-blue-800 border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700 focus:ring-white">
+                </div>
+                <div class="mt-6">
+                    <label for="message" class="block text-sm font-medium text-blue-100">Message</label>
+                    <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-4 py-3 rounded-md bg-blue-800 border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700 focus:ring-white" required></textarea>
+                </div>
+                <div class="mt-8 text-center">
+                    <button type="submit" class="bg-white text-blue-700 font-bold text-base sm:text-lg px-8 py-4 rounded-lg hover:bg-blue-100 transition duration-300">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!--  Footer  -->
+    <footer id="page-footer" class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
                 <div class="mb-8 flex justify-center items-center gap-4">
                     <img src="osha.png" alt="OSHA Certified" class="h-16 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/64x64/ffffff/1f2937?text=OSHA';">
                     <p class="text-gray-400 text-left text-sm">Proudly OSHA Certified,<br>committed to the highest safety standards.</p>
@@ -537,4 +586,5 @@
 
 </body>
 </html>
+
 
