@@ -124,7 +124,19 @@
     <header id="header" class="bg-white shadow-md w-full z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#">
-                <img src="logo-one-touch.avif" alt="One Touch Paint Logo" class="h-24 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/280x96/1d4ed8/ffffff?text=One+Touch+Paint';">
+                <!-- 
+                =====================================================================
+                CÓDIGO CORRIGIDO ABAIXO
+                =====================================================================
+                SUBSTITUIR: class="h-24 w-auto"
+                POR: class="h-20 md:h-24 w-auto"
+                MOTIVO: Reduz a altura do logo em telas pequenas (h-20) e a mantém
+                em telas maiores (md:h-24). Isso impede que a largura automática (w-auto)
+                torne a imagem muito larga em dispositivos com tela estreita,
+                o que causava a "sensação de zoom".
+                =====================================================================
+                -->
+                <img src="logo-one-touch.avif" alt="One Touch Paint Logo" class="h-20 md:h-24 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/280x96/1d4ed8/ffffff?text=One+Touch+Paint';">
             </a>
             
             <div class="hidden md:flex items-center space-x-8">
@@ -450,7 +462,7 @@
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if(link.getAttribute('href').startsWith('#')) {
-                       mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.add('hidden');
                     }
                 });
             });
@@ -586,5 +598,3 @@
 
 </body>
 </html>
-
-
