@@ -122,42 +122,29 @@
 
     <!-- =========== Header / Navigation =========== -->
     <header id="header" class="bg-white shadow-md w-full z-50">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+        <nav class="container mx-auto px-4 sm:px-8 lg:px-16 py-3 flex justify-between items-center">
             <a href="#">
-                <!-- 
-                =====================================================================
-                CÓDIGO CORRIGIDO ABAIXO
-                =====================================================================
-                SUBSTITUIR: class="h-24 w-auto"
-                POR: class="h-20 md:h-24 w-auto"
-                MOTIVO: Reduz a altura do logo em telas pequenas (h-20) e a mantém
-                em telas maiores (md:h-24). Isso impede que a largura automática (w-auto)
-                torne a imagem muito larga em dispositivos com tela estreita,
-                o que causava a "sensação de zoom".
-                =====================================================================
-                -->
                 <img src="logo-one-touch.avif" alt="One Touch Paint Logo" class="h-20 md:h-24 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/280x96/1d4ed8/ffffff?text=One+Touch+Paint';">
             </a>
             
-            <div class="hidden md:flex items-center space-x-8">
+            <div class="hidden lg:flex items-center space-x-8">
                 <a href="#about" class="text-gray-600 hover:text-blue-700 transition duration-300">About Us</a>
                 <a href="#services" class="text-gray-600 hover:text-blue-700 transition duration-300">Services</a>
                 <a href="#gallery" class="text-gray-600 hover:text-blue-700 transition duration-300">Gallery</a>
                 <a href="#testimonials" class="text-gray-600 hover:text-blue-700 transition duration-300">Testimonials</a>
             </div>
             
-            <a href="#contact-form" class="hidden md:block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
+            <a href="#contact-form" class="hidden lg:block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Get a Free Quote</a>
 
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden">
+            <button id="mobile-menu-button" class="lg:hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </nav>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white">
+        <div id="mobile-menu" class="hidden lg:hidden bg-white">
             <a href="#about-mobile" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">About Us</a>
             <a href="#services" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Services</a>
             <a href="#gallery" class="block py-3 px-6 text-gray-600 hover:bg-gray-100">Gallery</a>
@@ -173,20 +160,24 @@
     <main>
         <!--  Hero Section  -->
         <section class="hero-bg text-white h-[95vh] min-h-[600px] flex items-center">
-            <div class="container mx-auto px-6 text-center" data-aos="fade-in" data-aos-duration="1000">
+            <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+            <div class="container mx-auto px-4 sm:px-8 lg:px-16 text-center" data-aos="fade-in" data-aos-duration="1000">
                 <span class="bg-white/10 border border-white/20 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full inline-block">33 Years of Licensed & Insured Premium Painting</span>
-                <h1 class="text-4xl md:text-6xl leading-tight my-10">
+                
+                <h1 class="text-3xl md:text-4xl lg:text-5xl leading-tight my-8">
                     <span class="font-black">One & Done:</span>
                     <span class="font-medium">Painting done right the first time, <br> with no rework and no headaches.</span>
                 </h1>
-                <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-14">At One Touch Paint, we believe quality work should never need a second try. We get it right from the very first touch.</p>
+                <p class="text-lg text-gray-200 max-w-2xl mx-auto mb-10">At One Touch Paint, we believe quality work should never need a second try. We get it right from the very first touch.</p>
+                
                 <a href="#contact-form" class="bg-blue-600 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 inline-block">Get a Free Quote: 617-291-3875</a>
             </div>
         </section>
 
         <!--  Why Choose Us Section  -->
         <section class="py-20 md:py-28 bg-white" data-aos="fade-up">
-            <div class="container mx-auto px-6">
+            <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+            <div class="container mx-auto px-4 sm:px-8 lg:px-16">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Why Choose One Touch Paint?</h2>
                     <p class="text-gray-600 mt-4 max-w-2xl mx-auto">More than three decades of experience, official certifications, and a commitment to quality and safety in every project.</p>
@@ -223,7 +214,8 @@
 
         <!--  About Us Section (MOBILE)  -->
         <section id="about-mobile" class="py-20 bg-gray-50 md:hidden" data-aos="fade-up">
-            <div class="container mx-auto px-6 grid grid-cols-1 gap-12 items-center">
+            <!-- PADDING CORRIGIDO: Padding lateral aumentado (sm:px-8) -->
+            <div class="container mx-auto px-4 sm:px-8 grid grid-cols-1 gap-12 items-center">
                 <!-- Text Content -->
                 <div>
                     <h2 class="text-3xl font-bold text-gray-800 mb-6">Painting Experts Who Get It Right the First Time</h2>
@@ -250,9 +242,11 @@
 
         <!--  About Us Section (Visible only on Desktop)  -->
         <section id="about" class="py-20 md:py-28 bg-gray-50 hidden md:block" data-aos="fade-up">
-            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+            <div class="container mx-auto px-4 sm:px-8 lg:px-16 grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div data-aos="fade-right" data-aos-delay="200" class="flex flex-col justify-center h-full">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Painting Experts Who Get <br> It Right the First Time</h2>
+                    <!-- FONT-SIZE CORRIGIDO: Tamanho da fonte ajustado para melhor adaptação em notebooks -->
+                    <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">Painting Experts Who Get <br> It Right the First Time</h2>
                     <p class="text-gray-600 mb-5">At One Touch Paint, we don't just deliver painted walls; we deliver peace of mind. Julio and Arthur personally oversee each project, ensuring every detail is done correctly right from the first time.</p>
                     <p class="text-gray-600 mb-8">After decades in the industry, they have faced all types of challenges in residential, commercial, and industrial painting, and this practical experience is what transforms the result into a flawless finish, without rework and without headaches. Fully licensed, insured, and OSHA certified, we combine safety, professionalism, and excellence in every service.</p>
                     <a href="#contact-form" class="bg-blue-600 text-white font-semibold px-6 sm:px-8 py-4 rounded-lg hover:bg-blue-700 transition duration-300 self-start">Get a Free Quote</a>
@@ -279,7 +273,8 @@
         
         <!--  Services Section (REORDERED)  -->
         <section id="services" class="py-20 md:py-28 bg-white" data-aos="fade-up">
-            <div class="container mx-auto px-6">
+            <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+            <div class="container mx-auto px-4 sm:px-8 lg:px-16">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800">See what services we can offer for your home or business</h2>
                 </div>
@@ -325,14 +320,16 @@
 
         <!--  Gallery Section (Carousel)  -->
         <section id="gallery" class="py-20 md:py-28 bg-gray-50 overflow-hidden" data-aos="fade-up">
-            <div class="container mx-auto px-6">
+            <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+            <div class="container mx-auto px-4 sm:px-8 lg:px-16">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Recent Work</h2>
                     <p class="text-gray-600 mt-4">A glimpse into the quality and<br> craftsmanship we deliver.</p>
                 </div>
             </div>
-             <!-- Swiper Carousel -->
-            <div class="container mx-auto relative px-4 sm:px-0">
+             <!-- Swiper Carousel Container -->
+             <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+            <div class="container mx-auto relative px-4 sm:px-8 lg:px-16">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
                         <!-- Slides will be injected here by JS -->
@@ -343,14 +340,16 @@
                 <div class="swiper-button-next right-0 sm:right-2"></div>
             </div>
             <!-- Pagination Dots -->
-            <div class="container mx-auto">
+            <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+            <div class="container mx-auto px-4 sm:px-8 lg:px-16">
                  <div class="swiper-pagination mt-8 relative"></div>
             </div>
         </section>
 
         <!--  Testimonials Section  -->
         <section id="testimonials" class="py-20 md:py-28 bg-white" data-aos="fade-up">
-            <div class="container mx-auto px-6">
+            <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+            <div class="container mx-auto px-4 sm:px-8 lg:px-16">
                 <div class="text-center mb-16">
                     <span class="bg-blue-100 text-blue-800 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full inline-block">Testimonials</span>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-4">Hear it directly from your neighbors <br> in Massachusetts</h2>
@@ -367,7 +366,8 @@
 
     <!--  Locations Section -->
     <section id="locations" class="bg-gray-800 text-white">
-        <div class="container mx-auto px-6 py-16">
+        <!-- PADDING CORRIGIDO: Padding vertical (py) e horizontal (px) aumentados -->
+        <div class="container mx-auto px-4 sm:px-8 lg:px-16 py-24">
             <div class="text-center">
                 <h3 class="text-2xl font-bold">Professional painting near you</h3>
                 <p class="text-gray-400 mt-4 max-w-2xl mx-auto">We serve clients in several cities in Massachusetts, offering complete solutions in painting and finishing.</p>
@@ -395,7 +395,8 @@
 
     <!-- Contact Form Section -->
     <section id="contact-form" class="bg-blue-700 py-20 md:py-28">
-        <div class="container mx-auto px-6 text-center">
+        <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+        <div class="container mx-auto px-4 sm:px-8 lg:px-16 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white">Get a Free Quote Today</h2>
             <p class="text-blue-200 mt-4 max-w-2xl mx-auto">Fill out the form below and we'll get back to you as soon as possible to discuss your project.</p>
             <form action="#" method="POST" class="mt-12 max-w-xl mx-auto text-left">
@@ -426,7 +427,8 @@
 
     <!--  Footer  -->
     <footer id="page-footer" class="bg-gray-900 text-white">
-        <div class="container mx-auto px-6 py-8">
+        <!-- PADDING CORRIGIDO: Padding lateral aumentado para telas maiores (lg:px-16) -->
+        <div class="container mx-auto px-4 sm:px-8 lg:px-16 py-8">
             <div class="text-center">
                 <div class="mb-8 flex justify-center items-center gap-4">
                     <img src="osha.png" alt="OSHA Certified" class="h-16 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/64x64/ffffff/1f2937?text=OSHA';">
@@ -598,3 +600,4 @@
 
 </body>
 </html>
+
